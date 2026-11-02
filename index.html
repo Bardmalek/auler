@@ -839,6 +839,136 @@ html[lang="en"] .gantt .axis > div:last-child { order: -1; }
   .kpis.lead .kpi:first-child .val .disp { font-size: 2.6rem; }
 }
 
+/* =====================================================================
+   BOLD LAYER · look borrowed from BoardUI (boardui.com) theme tokens:
+   neutral greys, soft rounded cards, floating sidebar, blue accent.
+   ===================================================================== */
+:root {
+  --bg: #121212; --surface: #1a1a1a; --raised: #262626;
+  --border: #262626; --border-strong: #404040;
+  --text: #fafafa; --muted: #a3a3a3; --faint: #737373;
+  --hl: #fafafa; --on-hl: #0a0a0a;
+  --accent: #3b82f6; --accent-soft: rgba(59, 130, 246, .16); --on-accent: #ffffff;
+  --s1: #3b82f6; --s2: #60a5fa; --s3: #737373; --s4: #404040;
+  --grid: #262626; --hatch: rgba(163, 163, 163, .6);
+  --signal: #f43f5e; --signal-soft: rgba(244, 63, 94, .14);
+  --ok: #84cc16; --ok-soft: rgba(132, 204, 22, .14);
+  --warn: #f59e0b; --warn-soft: rgba(245, 158, 11, .14);
+  --radius: 8px; --radius-card: 16px;
+  --shadow-card: 0 1px 1px 0 rgb(0 0 0 / .2);
+  --shadow-sidebar: 0 0 0 1px #262626;
+  --rail: 248px;
+}
+:root[data-theme="light"] {
+  --bg: #ffffff; --surface: #f7f7f7; --raised: #ffffff;
+  --border: #ebebeb; --border-strong: #d4d4d4;
+  --text: #0a0a0a; --muted: #737373; --faint: #a3a3a3;
+  --hl: #0a0a0a; --on-hl: #ffffff;
+  --accent: #2563eb; --accent-soft: rgba(37, 99, 235, .1);
+  --s1: #2563eb; --s2: #93c5fd; --s3: #a3a3a3; --s4: #d4d4d4;
+  --grid: #ebebeb; --hatch: rgba(115, 115, 115, .6);
+  --signal: #e11d48; --signal-soft: rgba(225, 29, 72, .08);
+  --ok: #4d7c0f; --ok-soft: rgba(101, 163, 13, .12);
+  --warn: #b45309; --warn-soft: rgba(245, 158, 11, .14);
+  --shadow-card: 0 1px 1px 0 rgb(0 0 0 / .05);
+  --shadow-sidebar: 0 1px 0 0 rgb(0 0 0 / .02), 0 1px 12px 0 rgb(0 0 0 / .06), 0 0 1px 0 rgb(0 0 0 / .32);
+}
+
+/* type: plain, confident, bigger */
+html[lang="en"] h1, html[lang="en"] h2, html[lang="en"] h3 { font-stretch: 100%; letter-spacing: -.015em; }
+.disp { font-stretch: 100%; font-weight: 600; letter-spacing: -.03em; }
+.topbar { border-bottom: 0; padding: 24px 32px 8px; min-height: 0; }
+.topbar h1 { font-size: 1.75rem; font-weight: 600; letter-spacing: -.02em; }
+.view { padding: 16px 32px 96px; }
+.view-inner { gap: 24px; }
+.card-h h2, .card-h h3 { font-size: 1.0625rem; font-weight: 600; }
+.page-head .pitch { font-size: 1.25rem; line-height: 1.6; color: var(--muted); }
+.page-head .pitch b { color: var(--text); }
+
+/* floating sidebar */
+.app { background: var(--bg); }
+.rail { margin: 12px; margin-inline-end: 0; border: 0; border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-sidebar); overflow: hidden; }
+:root[data-theme="light"] .rail { background: #ffffff; }
+.nav-item { border-radius: var(--radius); color: var(--muted); padding: 8px 12px; }
+.nav-item:hover { background: var(--raised); border-color: transparent; color: var(--text); }
+:root[data-theme="light"] .nav-item:hover { background: #f7f7f7; }
+.nav-item[aria-current="page"] { background: var(--raised); color: var(--text); box-shadow: 0 0 0 1px var(--accent), inset 0 1px 0 0 rgb(255 255 255 / .25); }
+:root[data-theme="light"] .nav-item[aria-current="page"] { background: #f7f7f7; }
+.nav-item[aria-current="page"] .ico { color: var(--accent); }
+.nav-item[aria-current="page"] .key { background: var(--accent); color: var(--on-accent); border-color: var(--accent); opacity: 1; }
+.rail-status { border-top: 1px solid var(--border); }
+
+/* cards: soft, rounded, borderless */
+.card { background: var(--surface); border: 0; border-radius: var(--radius-card); padding: 24px; }
+.card.flat { background: transparent; }
+.kpi { background: var(--surface); border: 0; border-radius: var(--radius-card); padding: 20px; gap: 12px; }
+button.kpi:hover { background: var(--raised); }
+:root[data-theme="light"] button.kpi:hover { background: #f2f2f2; }
+.kpi .val .disp { font-size: 2.5rem; }
+.kpis.lead .kpi:first-child { background: var(--accent); color: var(--on-accent); }
+.kpis.lead .kpi:first-child .top, .kpis.lead .kpi:first-child .foot, .kpis.lead .kpi:first-child .u { color: rgb(255 255 255 / .8); }
+.kpis.lead .kpi:first-child .key { color: #fff; border-color: rgb(255 255 255 / .5); }
+.kpis.lead .kpi:first-child svg path { stroke: #fff !important; }
+.kpis.lead .kpi:first-child svg path:first-child { fill: #fff !important; opacity: .15 !important; }
+.kpis.lead .kpi:first-child svg rect { fill: #fff !important; }
+
+/* inner surfaces sit raised on cards */
+.bubble, .m2o .out, .voice, .paper, .tg, .ans { background: var(--raised); border-color: var(--border); border-radius: 12px; box-shadow: var(--shadow-card); }
+.m2o .step .key { background: var(--raised); }
+.m2o .step .key.on { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.bubble .mk-q { background: var(--accent); color: var(--on-accent); border-radius: 4px; }
+.bubble .mk-p { outline-color: var(--accent); border-radius: 4px; }
+
+/* buttons */
+.btn { border-radius: var(--radius); border-color: var(--border-strong); background: var(--raised); box-shadow: var(--shadow-card); }
+.btn:hover { border-color: var(--faint); }
+.btn.primary, .btn.on { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.seg { border-radius: 10px; border-color: var(--border); background: var(--surface); }
+.seg button { border-radius: 8px; }
+.seg button[aria-pressed="true"] { background: var(--raised); color: var(--text); box-shadow: 0 0 0 1px var(--border-strong); }
+input[type=range]::-webkit-slider-thumb { background: var(--accent); border-radius: 50%; }
+input[type=range]::-moz-range-thumb { background: var(--accent); border-radius: 50%; }
+
+/* pills and status: tinted chips instead of outlines */
+.pill { border-radius: 999px; border-color: transparent; background: var(--raised); }
+.pill.solid { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.pill.risk { background: var(--signal-soft); color: var(--signal); border-color: transparent; }
+.pill.risk::before { display: none; }
+.pill.warn { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
+.verdict { border-radius: 10px; border: 0; }
+.verdict.ok { background: var(--ok-soft); color: var(--ok); }
+.verdict.review { background: var(--warn-soft); color: var(--warn); }
+.verdict.review::before { display: none; }
+.check .b { border-radius: 6px; }
+.check.ok .b { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.dot { background: var(--ok); }
+.dot.off { background: transparent; border-color: var(--faint); }
+.dot.pulse { background: var(--accent); }
+.meter { border-radius: 999px; height: 8px; }
+.meter > i { border-radius: 999px; background: var(--accent); }
+.key { border-radius: 6px; }
+.demo-badge { padding: 4px 8px; border-radius: 999px; background: var(--surface); color: var(--muted); }
+
+/* tables */
+.tbl th { color: var(--faint); font-weight: 500; }
+.tbl tbody tr.click:hover, .tbl tbody tr.sel { background: var(--raised); }
+
+/* overview hero: the number is the headline */
+.hello h2 { font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 600; line-height: 1.3; }
+.hello h2 #ovDrafted { display: block; font-family: var(--font-display); font-stretch: 100%; font-size: clamp(4.5rem, 9vw, 8rem); line-height: .95; letter-spacing: -.05em; color: var(--accent); margin-bottom: 8px; direction: ltr; unicode-bidi: isolate; }
+.hello .card { box-shadow: none; }
+
+@media (max-width: 900px) {
+  .rail { margin: 0; border-radius: 0; box-shadow: 0 1px 0 0 var(--border); }
+  .topbar { padding: 16px 16px 4px; }
+  .topbar h1 { font-size: 1.375rem; }
+  .view { padding: 12px 16px 80px; }
+  .card { padding: 20px; }
+}
+html[dir="ltr"] .ico:has(use[href="#i-arrow"]), html[lang="en"] .ico:has(use[href="#i-arrow"]) { transform: scaleX(-1); }
+.rail-logo .label { white-space: nowrap; }
+.st-btns .btn { padding: 4px 8px; min-width: 0; gap: 4px; }
+
 </style>
 </head>
 <body>
@@ -1505,9 +1635,9 @@ defineView('overview', {
 
     <div class="kpis lead">
       <button class="kpi" data-goto="orders">
-        <div class="top">${icon('msg', 'sm')}<span>${T('سفارش پیش‌نویس‌شده امروز', 'Orders drafted today')}</span><span class="code key">P1</span></div>
-        <div class="val"><span class="disp" id="kDrafted">${fmt(S.drafted)}</span><span class="u">${T('سفارش', 'orders')}</span></div>
-        <div class="foot"><span>${T('بدون نیاز به ویرایش', 'No edits needed')}: <span class="n" id="kTl">${tl}%</span></span>${sparkline([120, 134, 128, 151, 160, 149, 172, S.drafted], 168, 36)}</div>
+        <div class="top">${icon('msg', 'sm')}<span>${T('پیش‌نویس بدون نیاز به ویرایش', 'Drafts needing no edits')}</span><span class="code key">P1</span></div>
+        <div class="val"><span class="disp" id="kTl">${tl}%</span></div>
+        <div class="foot"><span>${T('از', 'of')} <span class="n" id="kDrafted">${fmt(S.drafted)}</span> ${T('سفارش امروز', 'orders today')}</span>${sparkline([120, 134, 128, 151, 160, 149, 172, S.drafted], 168, 36)}</div>
       </button>
       <button class="kpi" data-goto="cheques">
         <div class="top"><span>${T('چک پرریسک این هفته', 'High-risk cheques this week')}</span><span class="code key">P2</span></div>
@@ -1876,7 +2006,7 @@ defineView('orders', {
   render() {
     if (!INBOX) INBOX = INBOX_SEED.map((m) => Object.assign({ state: 'new' }, m));
     const tl = Math.round(S.touchless / S.drafted * 100);
-    return `${pageHead(this, `<span class="pill">${icon('lock')}${T('پردازش روی سرور محلی', 'Processed on the local server')}</span><span class="pill">TELEGRAM · BALE · WHATSAPP · EMAIL</span>`)}
+    return `${pageHead(this, `<span class="pill">${icon('lock')}${T('پردازش روی سرور محلی', 'Processed on the local server')}</span><span class="pill">Telegram · Bale · WhatsApp · Email</span>`)}
     <div class="oc">
       <div class="card tight">
         <div class="card-h"><div><h3>${T('صندوق ورودی', 'Inbox')}</h3><div class="sub">${T('پیام‌های امروز از همه کانال‌ها', 'Today’s messages from every channel')}</div></div><div class="end"><span class="pill" id="ibCount">${fa(INBOX.length)}</span></div></div>
