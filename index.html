@@ -843,35 +843,31 @@ html[lang="en"] .gantt .axis > div:last-child { order: -1; }
    BOLD LAYER · look borrowed from BoardUI (boardui.com) theme tokens:
    neutral greys, soft rounded cards, floating sidebar, blue accent.
    ===================================================================== */
+/* colours and type: AULER brand pack (monochrome). Only status dots carry colour. */
 :root {
-  --bg: #121212; --surface: #1a1a1a; --raised: #262626;
-  --border: #262626; --border-strong: #404040;
-  --text: #fafafa; --muted: #a3a3a3; --faint: #737373;
-  --hl: #fafafa; --on-hl: #0a0a0a;
-  --accent: #3b82f6; --accent-soft: rgba(59, 130, 246, .16); --on-accent: #ffffff;
-  --s1: #3b82f6; --s2: #60a5fa; --s3: #737373; --s4: #404040;
-  --grid: #262626; --hatch: rgba(163, 163, 163, .6);
-  --signal: #f43f5e; --signal-soft: rgba(244, 63, 94, .14);
-  --ok: #84cc16; --ok-soft: rgba(132, 204, 22, .14);
-  --warn: #f59e0b; --warn-soft: rgba(245, 158, 11, .14);
+  --bg: #0B0B0F; --surface: #16161B; --raised: #1C1C22;
+  --border: #26262E; --border-strong: #3A3A44;
+  --text: #EDEDED; --muted: #8A8A92; --faint: #55555C;
+  --hl: #EDEDED; --on-hl: #0B0B0F;
+  --accent: var(--hl); --on-accent: var(--on-hl);
+  --s1: #EDEDED; --s2: #B4B4BA; --s3: #8A8A92; --s4: #55555C;
+  --grid: #26262E; --hatch: rgba(237, 237, 237, .62);
+  --signal: var(--text);
+  --ok: #84cc16; --live: #3b82f6;
   --radius: 8px; --radius-card: 16px;
-  --shadow-card: 0 1px 1px 0 rgb(0 0 0 / .2);
-  --shadow-sidebar: 0 0 0 1px #262626;
+  --shadow-card: none;
+  --shadow-sidebar: 0 0 0 1px #26262E;
   --rail: 248px;
 }
 :root[data-theme="light"] {
-  --bg: #ffffff; --surface: #f7f7f7; --raised: #ffffff;
-  --border: #ebebeb; --border-strong: #d4d4d4;
-  --text: #0a0a0a; --muted: #737373; --faint: #a3a3a3;
-  --hl: #0a0a0a; --on-hl: #ffffff;
-  --accent: #2563eb; --accent-soft: rgba(37, 99, 235, .1);
-  --s1: #2563eb; --s2: #93c5fd; --s3: #a3a3a3; --s4: #d4d4d4;
-  --grid: #ebebeb; --hatch: rgba(115, 115, 115, .6);
-  --signal: #e11d48; --signal-soft: rgba(225, 29, 72, .08);
-  --ok: #4d7c0f; --ok-soft: rgba(101, 163, 13, .12);
-  --warn: #b45309; --warn-soft: rgba(245, 158, 11, .14);
-  --shadow-card: 0 1px 1px 0 rgb(0 0 0 / .05);
-  --shadow-sidebar: 0 1px 0 0 rgb(0 0 0 / .02), 0 1px 12px 0 rgb(0 0 0 / .06), 0 0 1px 0 rgb(0 0 0 / .32);
+  --bg: #EDEDED; --surface: #FFFFFF; --raised: #F5F5F6;
+  --border: #D4D4D8; --border-strong: #B4B4BA;
+  --text: #0B0B0F; --muted: #55555C; --faint: #8A8A92;
+  --hl: #0B0B0F; --on-hl: #EDEDED;
+  --s1: #0B0B0F; --s2: #55555C; --s3: #8A8A92; --s4: #B4B4BA;
+  --grid: #E3E3E6; --hatch: rgba(11, 11, 15, .62);
+  --ok: #4d7c0f; --live: #2563eb;
+  --shadow-sidebar: 0 0 0 1px #D4D4D8;
 }
 
 /* type: plain, confident, bigger */
@@ -888,14 +884,14 @@ html[lang="en"] h1, html[lang="en"] h2, html[lang="en"] h3 { font-stretch: 100%;
 /* floating sidebar */
 .app { background: var(--bg); }
 .rail { margin: 12px; margin-inline-end: 0; border: 0; border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-sidebar); overflow: hidden; }
-:root[data-theme="light"] .rail { background: #ffffff; }
+
 .nav-item { border-radius: var(--radius); color: var(--muted); padding: 8px 12px; }
 .nav-item:hover { background: var(--raised); border-color: transparent; color: var(--text); }
-:root[data-theme="light"] .nav-item:hover { background: #f7f7f7; }
-.nav-item[aria-current="page"] { background: var(--raised); color: var(--text); box-shadow: 0 0 0 1px var(--accent), inset 0 1px 0 0 rgb(255 255 255 / .25); }
-:root[data-theme="light"] .nav-item[aria-current="page"] { background: #f7f7f7; }
-.nav-item[aria-current="page"] .ico { color: var(--accent); }
-.nav-item[aria-current="page"] .key { background: var(--accent); color: var(--on-accent); border-color: var(--accent); opacity: 1; }
+
+.nav-item[aria-current="page"] { background: var(--hl); color: var(--on-hl); }
+
+
+.nav-item[aria-current="page"] .key { background: transparent; color: var(--on-hl); border-color: currentColor; opacity: .8; }
 .rail-status { border-top: 1px solid var(--border); }
 
 /* cards: soft, rounded, borderless */
@@ -903,21 +899,21 @@ html[lang="en"] h1, html[lang="en"] h2, html[lang="en"] h3 { font-stretch: 100%;
 .card.flat { background: transparent; }
 .kpi { background: var(--surface); border: 0; border-radius: var(--radius-card); padding: 20px; gap: 12px; }
 button.kpi:hover { background: var(--raised); }
-:root[data-theme="light"] button.kpi:hover { background: #f2f2f2; }
+
 .kpi .val .disp { font-size: 2.5rem; }
 .kpis.lead .kpi:first-child { background: var(--accent); color: var(--on-accent); }
-.kpis.lead .kpi:first-child .top, .kpis.lead .kpi:first-child .foot, .kpis.lead .kpi:first-child .u { color: rgb(255 255 255 / .8); }
-.kpis.lead .kpi:first-child .key { color: #fff; border-color: rgb(255 255 255 / .5); }
-.kpis.lead .kpi:first-child svg path { stroke: #fff !important; }
-.kpis.lead .kpi:first-child svg path:first-child { fill: #fff !important; opacity: .15 !important; }
-.kpis.lead .kpi:first-child svg rect { fill: #fff !important; }
+.kpis.lead .kpi:first-child .top, .kpis.lead .kpi:first-child .foot, .kpis.lead .kpi:first-child .u { color: var(--on-hl); opacity: .75; }
+.kpis.lead .kpi:first-child .key { color: var(--on-hl); border-color: currentColor; }
+.kpis.lead .kpi:first-child svg path { stroke: var(--on-hl) !important; }
+.kpis.lead .kpi:first-child svg path:first-child { fill: var(--on-hl) !important; opacity: .12 !important; }
+.kpis.lead .kpi:first-child svg rect { fill: var(--on-hl) !important; }
 
 /* inner surfaces sit raised on cards */
 .bubble, .m2o .out, .voice, .paper, .tg, .ans { background: var(--raised); border-color: var(--border); border-radius: 12px; box-shadow: var(--shadow-card); }
 .m2o .step .key { background: var(--raised); }
 .m2o .step .key.on { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 .bubble .mk-q { background: var(--accent); color: var(--on-accent); border-radius: 4px; }
-.bubble .mk-p { outline-color: var(--accent); border-radius: 4px; }
+.bubble .mk-p { border-radius: 4px; }
 
 /* buttons */
 .btn { border-radius: var(--radius); border-color: var(--border-strong); background: var(--raised); box-shadow: var(--shadow-card); }
@@ -926,24 +922,22 @@ button.kpi:hover { background: var(--raised); }
 .seg { border-radius: 10px; border-color: var(--border); background: var(--surface); }
 .seg button { border-radius: 8px; }
 .seg button[aria-pressed="true"] { background: var(--raised); color: var(--text); box-shadow: 0 0 0 1px var(--border-strong); }
-input[type=range]::-webkit-slider-thumb { background: var(--accent); border-radius: 50%; }
-input[type=range]::-moz-range-thumb { background: var(--accent); border-radius: 50%; }
+input[type=range]::-webkit-slider-thumb { border-radius: 50%; }
+input[type=range]::-moz-range-thumb { border-radius: 50%; }
 
 /* pills and status: tinted chips instead of outlines */
 .pill { border-radius: 999px; border-color: transparent; background: var(--raised); }
 .pill.solid { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
-.pill.risk { background: var(--signal-soft); color: var(--signal); border-color: transparent; }
-.pill.risk::before { display: none; }
-.pill.warn { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
+.pill.risk { background: transparent; color: var(--text); border-color: var(--text); }
+.pill.warn { background: transparent; color: var(--text); border-color: var(--border-strong); }
 .verdict { border-radius: 10px; border: 0; }
-.verdict.ok { background: var(--ok-soft); color: var(--ok); }
-.verdict.review { background: var(--warn-soft); color: var(--warn); }
-.verdict.review::before { display: none; }
+.verdict.ok { background: var(--hl); color: var(--on-hl); }
+.verdict.review { border: 1px solid var(--text); }
 .check .b { border-radius: 6px; }
 .check.ok .b { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .dot { background: var(--ok); }
 .dot.off { background: transparent; border-color: var(--faint); }
-.dot.pulse { background: var(--accent); }
+.dot.pulse { background: var(--live); }
 .meter { border-radius: 999px; height: 8px; }
 .meter > i { border-radius: 999px; background: var(--accent); }
 .key { border-radius: 6px; }
@@ -955,7 +949,7 @@ input[type=range]::-moz-range-thumb { background: var(--accent); border-radius: 
 
 /* overview hero: the number is the headline */
 .hello h2 { font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 600; line-height: 1.3; }
-.hello h2 #ovDrafted { display: block; font-family: var(--font-display); font-stretch: 100%; font-size: clamp(4.5rem, 9vw, 8rem); line-height: .95; letter-spacing: -.05em; color: var(--accent); margin-bottom: 8px; direction: ltr; unicode-bidi: isolate; }
+.hello h2 #ovDrafted { display: block; font-family: var(--font-display); font-stretch: 100%; font-size: clamp(4.5rem, 9vw, 8rem); line-height: .95; letter-spacing: -.05em; color: var(--text); margin-bottom: 8px; direction: ltr; unicode-bidi: isolate; }
 .hello .card { box-shadow: none; }
 
 @media (max-width: 900px) {
@@ -968,6 +962,7 @@ input[type=range]::-moz-range-thumb { background: var(--accent); border-radius: 
 html[dir="ltr"] .ico:has(use[href="#i-arrow"]), html[lang="en"] .ico:has(use[href="#i-arrow"]) { transform: scaleX(-1); }
 .rail-logo .label { white-space: nowrap; }
 .st-btns .btn { padding: 4px 8px; min-width: 0; gap: 4px; }
+html[lang="fa"] .hello h2 #ovDrafted { font-family: var(--font-fa); direction: rtl; letter-spacing: 0; font-weight: 800; }
 
 </style>
 </head>
@@ -1420,10 +1415,17 @@ function simLoop() {
 }
 
 /* ---------------- clock ---------------- */
+/* English shows Vancouver time, Persian shows Iran time */
+const _clk = {
+  en: { t: new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Vancouver', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }),
+        d: new Intl.DateTimeFormat('en-US', { timeZone: 'America/Vancouver', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }), city: 'Vancouver' },
+  fa: { t: new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Tehran', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }),
+        d: new Intl.DateTimeFormat('fa-IR-u-ca-persian', { timeZone: 'Asia/Tehran', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }), city: 'تهران' }
+};
 function tickClock() {
-  const d = new Date();
-  $('#clockT').textContent = d.toTimeString().slice(0, 8);
-  $('#clockD').textContent = jLong(d);
+  const d = new Date(), c = EN() ? _clk.en : _clk.fa;
+  $('#clockT').textContent = c.t.format(d);
+  $('#clockD').textContent = c.d.format(d) + ' · ' + c.city;
 }
 
 /* ---------------- theme, language & fullscreen ---------------- */
@@ -2408,7 +2410,7 @@ function marginChart() {
   CATALOG.forEach((s, i) => {
     const m = marginOf(s), y = pt + i * rowH + 5, h = rowH - 10;
     const a = x(Math.min(0, m)), b = x(Math.max(0, m));
-    g += `<rect x="${a}" y="${y}" width="${Math.max(1.5, b - a)}" height="${h}" style="${m < 0 ? 'fill:var(--signal)' : m < S.targetMargin / 2 ? 'fill:var(--s3)' : 'fill:var(--s1)'}"></rect>`;
+    g += `<rect x="${a}" y="${y}" width="${Math.max(1.5, b - a)}" height="${h}" style="${m < 0 ? 'fill:url(#hatch);stroke:var(--s1);stroke-width:1.2' : m < S.targetMargin / 2 ? 'fill:var(--s3)' : 'fill:var(--s1)'}"></rect>`;
     g += EN() ? `<text x="4" y="${y + h - 3}" text-anchor="start" style="font-size:12px;fill:var(--text)">${s.enShort}</text>` : `<text class="fa" x="${W - 4}" y="${y + h - 3}" text-anchor="end" style="font-size:12px;fill:var(--text)">${s.short}</text>`;
     g += `<rect x="0" y="${y - 4}" width="${W}" height="${rowH}" style="fill:transparent" data-tip="<div class='tt'>${skuName(s)}</div>${T('حاشیه با قیمت جایگزینی', 'Margin at replacement cost')}: ${(m * 100).toFixed(1)}%<br>${T('قیمت فعلی', 'Current price')}: ${moneyFa(s.price)}<br>${T('قیمت جایگزینی', 'Replacement cost')}: ${moneyFa(replCost(s))}"></rect>`;
   });
@@ -2449,7 +2451,7 @@ defineView('pricing', {
       <div class="card c7">
         <div class="card-h"><div><h2>${T('حاشیه هر قلم', 'Margin per SKU')}</h2><div class="sub">${T('خط‌چین: حاشیه هدف', 'Dashed line: target margin')}</div></div></div>
         <div id="mChart"></div>
-        <div class="legend"><span><i class="box s1"></i>${T('سالم', 'Healthy')}</span><span><i class="box"></i>${T('ناکافی', 'Thin')}</span><span><i class="box" style="background:var(--signal);border-color:var(--signal)"></i>${T('زیر قیمت جایگزینی', 'Below replacement cost')}</span></div>
+        <div class="legend"><span><i class="box s1"></i>${T('سالم', 'Healthy')}</span><span><i class="box"></i>${T('ناکافی', 'Thin')}</span><span><i class="box ht"></i>${T('زیر قیمت جایگزینی', 'Below replacement cost')}</span></div>
       </div>
       <div class="card c5">
         <div class="card-h"><div><h3>${T('قیمت بر اساس نوع پرداخت', 'Price by payment term')}</h3><div class="sub">${T('چند درصد گران‌تر از نقد تا ارزش واقعی حفظ شود', 'How far above cash to keep the real value')}</div></div></div>
